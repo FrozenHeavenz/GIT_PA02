@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private Animator thisAnimator = null;
 
     private float moveSpeed = 0.05f;
+    public GameObject Explosion;
 
     void Start()
     {
@@ -54,4 +55,22 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -1.5f, 1.5f), transform.position.y, transform.position.z);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Obstacle")
+        {
+            if (GameManager.Lives > 0)
+            {
+                GameManager.Lives -= 1;
+                HUD.HUDManager.UpdateLives();
+                Destroy(other.gameObject);
+                Instantiate(Explosion, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                HUD.HUDManager.GameOver();
+            }
+           
+        }
+    }
 }

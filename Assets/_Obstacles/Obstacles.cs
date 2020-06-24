@@ -17,9 +17,10 @@ public class Obstacles : MonoBehaviour
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - ( 8 * 2 * Time.deltaTime));
 
-        if(transform.position.z <= -8)
+        if(transform.position.z <= -10)
         {
             Destroy(gameObject);
         }
     }
+
 }
